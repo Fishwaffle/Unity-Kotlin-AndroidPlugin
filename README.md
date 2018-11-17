@@ -1,4 +1,4 @@
-# UnityNativeAndroid
+# Unity Kotlin AndroidPlugin
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 UnityでKotlinを使ってAndroidのAPIを呼び出すサンプル
