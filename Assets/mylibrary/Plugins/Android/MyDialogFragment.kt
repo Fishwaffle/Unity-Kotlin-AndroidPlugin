@@ -11,7 +11,8 @@ import android.os.Bundle
 import com.unity3d.player.UnityPlayer
 
 object MyDialogFragment {
-    fun showDialogFragment(title: String = "", message: String = "", positiveMessage: String = "", negativeMessage: String = "", cancelable: Boolean = false, gameObjectName: String = "") {
+    fun showDialogFragment(title: String = "", message: String = "", positiveMessage: String = "", negativeMessage: String = "", cancelable: Boolean = false,
+                           gameObjectName: String = "", positiveCallbackName: String = "", negativeCallbackName: String = "") {
         val dialog = MyAlertDialogFragment()
         val args = Bundle()
         args.putString("title", title)
@@ -20,6 +21,8 @@ object MyDialogFragment {
         args.putString("negativeMessage", negativeMessage)
         args.putBoolean("cancelable", cancelable)
         args.putString("gameObjectName", gameObjectName)
+        args.putString("positiveCallbackName", positiveCallbackName)
+        args.putString("negativeCallbackName", negativeCallbackName)
         dialog.arguments = args
 
         UnityPlayer.currentActivity.runOnUiThread {
@@ -36,6 +39,8 @@ object MyDialogFragment {
             val negativeMessage = arguments.getString("negativeMessage")
             isCancelable = arguments.getBoolean("cancelable")
             val gameObjectName = arguments.getString("gameObjectName")
+            val positiveCallbackName = arguments.getString("positiveCallbackName")
+            val negativeCallbackName = arguments.getString("negativeCallbackName")
 
             return AlertDialog.Builder(activity).apply {
                 if (title.isNotEmpty()) {
@@ -46,15 +51,15 @@ object MyDialogFragment {
                 }
                 if (positiveMessage.isNotEmpty()) {
                     setPositiveButton(positiveMessage) { _, _ ->
-                        if (gameObjectName.isNotEmpty()) {
-                            UnityPlayer.UnitySendMessage(gameObjectName, "onDialogPositiveButton", "")
+                        if (gameObjectName.isNotEmpty() && positiveCallbackName.isNotEmpty()) {
+                            UnityPlayer.UnitySendMessage(gameObjectName, positiveCallbackName, "")
                         }
                     }
                 }
                 if (negativeMessage.isNotEmpty()) {
                     setNegativeButton(negativeMessage) { _, _ ->
-                        if (gameObjectName.isNotEmpty()) {
-                            UnityPlayer.UnitySendMessage(gameObjectName, "onDialogNegativeButton", "")
+                        if (gameObjectName.isNotEmpty() && positiveCallbackName.isNotEmpty()) {
+                            UnityPlayer.UnitySendMessage(gameObjectName, negativeCallbackName, "")
                         }
                     }
                 }

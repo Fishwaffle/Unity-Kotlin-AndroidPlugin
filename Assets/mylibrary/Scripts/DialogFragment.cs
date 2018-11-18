@@ -26,7 +26,7 @@ namespace AndroidPlugin
             using (var javaObj = new AndroidJavaObject("com.example.fishwaffle.mylibrary.MyDialogFragment"))
             {
                 javaObj.Call("showDialogFragment", title, message, positiveMessage, negativeMessage, cancelable,
-                    gameObjectName);
+                    gameObjectName, positiveCallbackName, negativeCallbackName);
             }
         }
     }
