@@ -23,9 +23,9 @@ namespace AndroidPlugin
             string positiveMessage = null, string negativeMessage = null, bool cancelable = true,
             string gameObjectName = null, string positiveCallbackName = null, string negativeCallbackName = null)
         {
-            using (var javaObj = new AndroidJavaClass("com.example.fishwaffle.mylibrary.MyDialogFragmentKt"))
+            using (var javaClass = new AndroidJavaClass("com.example.fishwaffle.mylibrary.MyDialogFragmentKt"))
             {
-                javaObj.CallStatic("showDialogFragment", title, message, positiveMessage, negativeMessage, cancelable,
+                javaClass.CallStatic("showDialogFragment", title, message, positiveMessage, negativeMessage, cancelable,
                     gameObjectName, positiveCallbackName, negativeCallbackName);
             }
         }
